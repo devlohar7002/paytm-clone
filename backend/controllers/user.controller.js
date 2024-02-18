@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { User } from "../models/user.model.js";
+import { Account } from "../models/account.model.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import ApiError from "../utils/ApiError.js";
 import z from "zod";
@@ -60,6 +61,10 @@ const signup = async (req, res, next) => {
         "Something went wrong while registering the user"
       );
     }
+
+    const balance = Math.floor(Math.random() * 10000) + 1;
+
+    await Account.create({ userId: currentUser._id, balance });
 
     const accessToken = generateAccessToken({
       id: currentUser._id,
