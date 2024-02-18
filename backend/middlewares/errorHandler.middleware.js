@@ -5,7 +5,7 @@ const errorHandler = (err, req, res, next) => {
 
   res
     .status(statusCode)
-    .send(new ApiResponse(statusCode, { message: err.message }, err.success));
+    .json({ statusCode, data: { message: err.message }, success: false });
 };
 
 export default errorHandler;
